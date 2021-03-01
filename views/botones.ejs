@@ -17,6 +17,11 @@
         <button id="boton">Botón especial xd</button>
     </div>
     <button id="reset">Resetear todo</button>
+
+
+    <button id="verde">Verde</button>
+    <button id="azul">Azul</button>
+    <button id="rosado">Rosado</button>
     
 </body>
 <script type="text/javascript">
@@ -36,6 +41,32 @@
     socket.on('resetear', function(data){
         $('#titulo').text(data.botonClicks)
     })
+
+    $('#verde').on('click', function(){
+        socket.emit('cambiarverde');
+    })
+    $('#azul').on('click', function(){
+        socket.emit('cambiarazul');
+    })
+    $('#rosado').on('click', function(){
+        socket.emit('cambiarrosado');
+    })
+
+    socket.on('colores', function(data){
+        $('body').css('background-color', `${data.cambiacolor}`)
+    })
+    socket.on('fondoverde', function(){
+        $('body').css('background-color', 'green')
+    })
+    socket.on('fondoazul', function(){
+        $('body').css('background-color', 'blue')
+    })
+    socket.on('fondorosado', function(){
+        $('body').css('background-color', 'pink')
+    })
+    
+
+
 
 </script>
 </html>

@@ -4,6 +4,7 @@ const session = require('express-session');
 const app = express();
 const port = 8000;
 let contador = 0;
+let color = "";
 
 app.use(session({secret: 'holasoytuclave'})); 
 
@@ -54,6 +55,32 @@ io.on('connection', function(socket){
             botonClicks: `Este botón ha sido clickeado ${contador} veces`
         });
 
+    })
+
+    socket.emit('colores', {
+        cambiacolor: color
+    })
+    socket.broadcast.emit('colores', {
+        cambiacolor: color
+    })
+
+
+    socket.on('cambiarverde', function(){
+        socket.emit('fondoverde');
+        socket.broadcast.emit('fondoverde');
+        color = 'green'
+    })
+
+    socket.on('cambiarazul', function(){
+        socket.emit('fondoazul');
+        socket.broadcast.emit('fondoazul');
+        color = 'blue'
+    })
+
+    socket.on('cambiarrosado', function(){
+        socket.emit('fondorosado');
+        socket.broadcast.emit('fondorosado');
+        color = 'pink'
     })
 
 })
