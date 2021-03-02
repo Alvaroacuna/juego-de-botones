@@ -57,15 +57,20 @@ io.on('connection', function(socket){
 
     })
 
-    socket.emit('colores', {
+    /* socket.emit('colores', {
         cambiacolor: color
     })
     socket.broadcast.emit('colores', {
         cambiacolor: color
     })
+    */
+
+    socket.on('cambiarcolor', function(data){
+        io.emit('color', data)
+    })
 
 
-    socket.on('cambiarverde', function(){
+    /* socket.on('cambiarverde', function(){
         socket.emit('fondoverde');
         socket.broadcast.emit('fondoverde');
         color = 'green'
@@ -82,6 +87,13 @@ io.on('connection', function(socket){
         socket.broadcast.emit('fondorosado');
         color = 'pink'
     })
+
+    socket.on('cambiaramarillo', function(){
+        socket.emit('fondoamarillo');
+        socket.broadcast.emit('fondoamarillo');
+        color = 'yellow'
+    })
+    */
 
 })
 
